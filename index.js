@@ -1,15 +1,15 @@
 const config = require("js-yaml").load(require("fs").readFileSync("./config.yml"))
 
+const store = require("le-store-s3").create({S3: {bucketName: config.bucketName}});
+const challenge = require("le-challenge-s3").create({S3: {bucketName: config.bucketName}});
+
 const glx = require('greenlock-express').create({
   server: 'https://acme-v02.api.letsencrypt.org/directory',
   version: 'draft-11', // Let's Encrypt v2 (ACME v2),
   telemetry: true,
   approveDomains: approveDomains,
   logRejectedDomains: false,
-  store: require('le-store-certbot').create({
-    configDir: require('path').join(require('os').homedir(), 'acme', 'etc'),
-    webrootPath: '/tmp/acme-challenges'
-  })
+  store: store
 });
 
 const httpApp = require("express")();
@@ -53,9 +53,8 @@ async function approveDomain(domain) {
   return await !!config.domains[domain];
 }
 
-var http01 = require('le-challenge-fs').create({ webrootPath: '/tmp/acme-challenges' });
 function approveDomains(opts, certs, cb) {
-  opts.challenges = { 'http-01': http01 };
+  opts.challenges = { 'http-01': challenge };
 
   if (certs) {
     opts.domains = certs.altnames;
