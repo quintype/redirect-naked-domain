@@ -23,6 +23,9 @@
   "homepage": "https://github.com/gja/redirect-naked-domains#readme",
   "dependencies": {
     "express": "^4.16.3",
-    "greenlock": "^2.3.11"
+    "greenlock-express": "^2.4.1",
+    "js-yaml": "^3.12.0",
+    "redirect-https": "^1.1.6",
+    "sleep-promise": "^8.0.1"
   }
 }
