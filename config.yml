@@ -3,5 +3,6 @@ email: testing@example.com
 domains:
   test1.gja.in:
     dest: test2.gja.in
-    hsts: true
+    hsts: false
     ttl: 3600
+    status: 302
