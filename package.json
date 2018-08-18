@@ -1,0 +1,28 @@
+{
+  "name": "redirect-naked-domains",
+  "version": "1.0.0",
+  "description": "Redirect Naked Domains with SSL",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/gja/redirect-naked-domains.git"
+  },
+  "keywords": [
+    "redirect",
+    "ssl",
+    "naked"
+  ],
+  "author": "Tejas Dinkar <tejas@gja.in>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gja/redirect-naked-domains/issues"
+  },
+  "homepage": "https://github.com/gja/redirect-naked-domains#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "greenlock": "^2.3.11"
+  }
+}
