@@ -1,4 +1,5 @@
 allowAllDomains: true
+bucketName: bucketInS3
 email: testing@example.com
 domains:
   test1.gja.in:

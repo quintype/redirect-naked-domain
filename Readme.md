@@ -14,6 +14,7 @@ Please ensure /app/acme and /tmp/acme-challenges are persisted between docker ru
 
 See the [Sample Config](/config.yml).
 
+* This app uses s3 to store certificates and challenges. Please ensure you have the correct IAM roles configured, or you have the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY in the environment.
 * Email must be set to a valid email address.
 * The most important configuration is `allowAllDomains`. Setting this will request certificates for any domain that is requested. However, you will be vulnerable to requests for bogus SNI certs, which will make you hit LetsEncrypt rate limits. Setting this to false means that you will need to keep deploying to add new domains.
 * Settings within the domain are all optional
@@ -23,6 +24,4 @@ See the [Sample Config](/config.yml).
 
 Here are a list of things I'd like to do eventually
 
-[ ] Move the domain configuration into some sort of datastore
-[ ] Move the certificates into a permanent store
-[ ] Figure out a way to share challenges
+- [ ] Move the domain configuration into some sort of datastore
