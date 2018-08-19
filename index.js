@@ -30,7 +30,7 @@ httpsApp.use('/*', function (req, res) {
   const destinationDomain = domainConfig.dest || 'www.' + req.headers.host;
 
   if(domainConfig.hsts) {
-    res = res.header("Strict-Transport-Security", "max-age=3600; includeSubDomains; preload");
+    res = res.header("Strict-Transport-Security", domainConfig.hsts);
   }
 
   res
