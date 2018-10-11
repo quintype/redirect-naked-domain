@@ -35,7 +35,7 @@ httpsApp.use('/*', function (req, res) {
 
   res
     .header("Cache-Control", `public,max-age=${domainConfig.ttl || 3600}`)
-    .redirect(domainConfig.status || 302, 'https://' + destinationDomain + req.url)
+    .redirect(domainConfig.status || 302, 'https://' + destinationDomain + req.originalUrl)
 });
 require('https').createServer(glx.httpsOptions, httpsApp).listen(3443, function () {
   console.log("Listening on HTTPS on", this.address());
