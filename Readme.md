@@ -19,6 +19,16 @@ See the [Sample Config](/config.yml).
 * The most important configuration is `allowAllDomains`. Setting this will request certificates for any domain that is requested. However, you will be vulnerable to requests for bogus SNI certs, which will make you hit LetsEncrypt rate limits. Setting this to false means that you will need to keep deploying to add new domains.
 * Settings within the domain are all optional
 
+## Manually Generating a Certificate
+
+If you need to generate a certificate for a zero downtime switch, do the following:
+
+```shell
+$ sudo certbot -d domain.com --manual --preferred-challenges http certonly
+$ sudo aws s3 cp --recursive /etc/letsencrypt/live/domain.com s3://your-bucket/configs/live/domain.com
+$ sudo aws s3 cp --recursive /etc/letsencrypt/achive/domain.com s3://your-bucket/configs/achive/domain.com
+```
+
 
 ## Todo
 
