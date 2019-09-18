@@ -25,6 +25,13 @@ require('http').createServer(glx.middleware(httpApp)).listen(3000, function () {
 
 
 var httpsApp = require('express')();
+
+httpsApp.use('/service-worker.js', function (req, res) {
+  res.setHeader("Content-Type", "application/javascript")
+  res.setHeader("Cache-Control", `public,max-age=${domainConfig.ttl || 3600}`)
+  res.send('');
+});
+
 httpsApp.use('/*', function (req, res) {
   const domainConfig = config.domains[req.headers.host] || {};
   const destinationDomain = domainConfig.dest || 'www.' + req.headers.host;
