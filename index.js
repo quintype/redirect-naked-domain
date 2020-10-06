@@ -17,7 +17,7 @@ httpApp.all("/*", function(req, res) {
   const domainConfig = config.domains[req.headers.host] || {};
   res
     .header("Cache-Control", `public,max-age=${domainConfig.ttl || 3600}`)
-    .redirect(domainConfig.status || 302, 'https://' + req.headers.host + req.url)
+    .redirect(domainConfig.status || 301, 'https://' + req.headers.host + req.url)
 })
 require('http').createServer(glx.middleware(httpApp)).listen(3000, function () {
   console.log("Listening to HTTP on ", this.address());
@@ -43,7 +43,7 @@ httpsApp.use('/*', function (req, res) {
 
   res
     .header("Cache-Control", `public,max-age=${domainConfig.ttl || 3600}`)
-    .redirect(domainConfig.status || 302, 'https://' + destinationDomain + req.originalUrl)
+    .redirect(domainConfig.status || 301, 'https://' + destinationDomain + req.originalUrl)
 });
 require('https').createServer(glx.httpsOptions, httpsApp).listen(3443, function () {
   console.log("Listening on HTTPS on", this.address());
