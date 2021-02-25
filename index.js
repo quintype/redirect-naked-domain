@@ -69,16 +69,11 @@ require("https")
     console.log("Listening on HTTPS on", this.address());
   });
 
-async function approveDomain(domain) {
-  if (!domain) {
-    return await true;
+function approveDomain(domain) {
+  if (!domain || config.allowAllDomains) {
+    return true;
   }
-
-  if (config.allowAllDomains) {
-    return await true;
-  }
-
-  return await !!config.domains[domain];
+  return !!config.domains[domain];
 }
 
 function approveDomains(opts, certs, cb) {
@@ -91,12 +86,10 @@ function approveDomains(opts, certs, cb) {
     opts.agreeTos = true;
   }
 
-  approveDomain(opts.domain).then((approved) => {
-    if (approved) {
-      cb(null, { options: opts, certs: certs });
-    } else {
-      console.warn("Rejecting Request for " + opts.domain);
-      cb("Not Approved", {});
-    }
-  });
+  if (approveDomain(opts.domain)) {
+    cb(null, { options: opts, certs: certs });
+  } else {
+    console.warn("Rejecting Request for " + opts.domain);
+    cb("Not Approved", {});
+  }
 }
